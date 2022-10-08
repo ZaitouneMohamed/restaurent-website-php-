@@ -36,7 +36,6 @@ if (isset($_POST['submit'])) {
 	<div class="container">
 		<form method="POST" class="login-email">
 			<p class="login-text" style="font-size: 2rem; font-weight: 900;">Login</p>
-			<h1>hii</h1>
 			<div class="input-group">
 				<input type="email" placeholder="Email" name="email" required>
 			</div>
