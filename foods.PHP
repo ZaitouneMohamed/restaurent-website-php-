@@ -1,0 +1,113 @@
+<?php 
+include('admin/connection.php');
+session_start(); 
+if(!isset($_SESSION["username"])){
+    header("location:login.php");
+}
+else{
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Important to make website responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Website</title>
+
+    <!-- Link our CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navbar Section Starts Here -->
+    <?php
+        include ("includes/navbar.php");
+    ?>
+    <!-- Navbar Section Ends Here -->
+
+    <!-- fOOD sEARCH Section Starts Here -->
+    <section class="food-search text-center">
+        <div class="container">
+            
+            <form action="food-search.html" method="POST">
+                <input type="search" name="search" placeholder="Search for Food.." required>
+                <input type="submit" name="submit" value="Search" class="btn btn-primary">
+            </form>
+
+        </div>
+    </section>
+    <!-- fOOD sEARCH Section Ends Here -->
+
+
+
+    <!-- fOOD MEnu Section Starts Here -->
+    <?php 
+        $req_menu=mysqli_query($con,"SELECT categorie_id,image_name,title,price,description FROM `food`")
+    ?>
+    <section class="food-menu">
+        <div class="container">
+            <h2 class="text-center">Food Menu</h2>
+    <?php
+        while($row2=mysqli_fetch_array($req_menu)){
+            $id=$row2[0];
+            echo("
+            <div class='food-menu-box'>
+                <div class='food-menu-img'>
+                    <img src='admin/images/$row2[1]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
+                </div>
+                <div class='food-menu-desc'>
+                    <h4>$row2[2]</h4>
+                    <p class='food-price'>$.$row2[3]</p>
+                    <p class='food-detail'>
+                        $row2[4]
+                    </p>
+                    <br>
+                    <a href='order.php?img=$row2[1]&title=$row2[2]&price=$row2[3].00' class='btn btn-primary'>Order Now</a>
+                </div>
+                </div>
+            ");
+        }
+            
+    ?>
+
+
+
+
+            <div class="clearfix"></div>
+
+            
+
+        </div>
+
+    </section>
+    <!-- fOOD Menu Section Ends Here -->
+
+    <!-- social Section Starts Here -->
+    <section class="social">
+        <div class="container text-center">
+            <ul>
+                <li>
+                    <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></a>
+                </li>
+                <li>
+                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
+                </li>
+                <li>
+                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- social Section Ends Here -->
+
+    <!-- footer Section Starts Here -->
+    <section class="footer">
+        <div class="container text-center">
+            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
+        </div>
+    </section>
+    <!-- footer Section Ends Here -->
+
+</body>
+</html>
+<?php }?>
