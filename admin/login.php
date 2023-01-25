@@ -8,12 +8,13 @@
     
     if (isset($_POST['submit'])) {
             $username = $_POST['username'];
-            $password =md5($_POST['password']);
+            $password =$_POST['password'];
             $sql = "SELECT * FROM admin_table WHERE username='$username' AND password='$password'";
             $result = mysqli_query($con, $sql);
             if ($result->num_rows > 0) {
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['admin_username'] = $row['username'];
+                $_SESSION['username'] = $row['username'];
                 $_SESSION["admin_fullname"]= $row['full_name'];
                 header("Location:index.php");
             } else {

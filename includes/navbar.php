@@ -12,7 +12,7 @@
     <title>Document</title>
 </head>
 <?php
-  if (isset($_POST["submit"])){
+  if (isset($_POST["hhh"])){
     $search=$_POST["search"];
     $req_search_food=mysqli_query($con,"SELECT * FROM `food` WHERE title like '%$search%'");
     $x=mysqli_num_rows($req_search_food);
@@ -23,7 +23,6 @@
         header("location:food-search.PHP?id=$search");
         ob_end_flush();
     }
-    //echo ("<script>alert('all good')</script>");
 }
 ?>
 <body>
@@ -64,7 +63,7 @@
     </ul>
     <form class="d-flex" role="search" method="post">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-        <button class="btn btn-outline-success" type="submit" name="submit">Search</button>
+        <button class="btn btn-outline-success" type="submit" name="hhh">Search</button>
       </form>
 
   </div>

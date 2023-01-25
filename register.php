@@ -10,7 +10,6 @@ if (isset($_POST['submit'])) {
 	$email = $_POST['email'];
 	$password = md5($_POST['password']);
 	$cpassword = md5($_POST['cpassword']);
-	//echo $username.$email.$password.$cpassword;
 	if ($password == $cpassword) {
 		$sql = "SELECT * FROM tbl_client WHERE email='$email'";
 		$result = mysqli_query($con, $sql);

@@ -32,8 +32,7 @@ else{
             <center>
                 username : <b><i><?php echo $row[2];?></i></b><br><br>
                 email : <b><i><?php echo $row[1];?></i></b><br><br>
-                mobile : <b><i><?php echo $row[3];?></i></b><br><br>
-                adresse : <b><i><?php echo $row[7];?></i></b><br><br>
+                mobile : <b><i><?php echo $row[5];?></i></b><br><br>
                 <a href="update_profile.php" class='btn btn-primary'>update profile information</a>
                 <a href="change_password.php" class='btn btn-danger'>change password</a>
             </center>
