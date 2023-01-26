@@ -19,7 +19,7 @@ include ('partial/menu.php'); include('connection.php');
         <div class="aa">
         <h1><strong><i><?php echo $_SESSION['admin_fullname'];?></i></strong></h1>
         <br>
-        <a href="add_categorie.php" class="btn-primary">add categorie</a>
+        <a href="add_categorie.php" class="btn btn-primary">add categorie</a>
         <br><br>
 
         <table class="table table-hover">
@@ -42,13 +42,13 @@ include ('partial/menu.php'); include('connection.php');
                             echo ('<tr>');
                             echo ("<td> $row[0] </td>");
                             echo ("<td> $row[1] </td>");
-                            echo ("<td> <img src='images/$row[2]' alt='' width='50px' height='50px'> </td>");
+                            echo ("<td> <img src='images/categorie/$row[2]' alt='' width='50px' height='50px'> </td>");
                             echo ("<td> $row[3] </td>");
                             echo ("<td> $row[4] </td>");
                             echo ("
                             <td> 
-                                <a href='update_categorie.php?id=$id' class='btn-secondary'>update categorie</a>
-                                <a href='delete_categorie.php?id=$id' class='btn-primary'>delete categorie</a>
+                                <a href='update_categorie.php?id=$id' class='btn btn-warning'>update categorie</a>
+                                <a href='delete_categorie.php?id=$id' class='btn btn-danger'>delete categorie</a>
                             </td>
                             ");
                             echo ('</tr>');

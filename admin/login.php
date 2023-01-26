@@ -8,14 +8,14 @@
     
     if (isset($_POST['submit'])) {
             $username = $_POST['username'];
-            $password =$_POST['password'];
+            $password =md5($_POST['password']);
             $sql = "SELECT * FROM admin_table WHERE username='$username' AND password='$password'";
             $result = mysqli_query($con, $sql);
             if ($result->num_rows > 0) {
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['admin_username'] = $row['username'];
                 $_SESSION['username'] = $row['username'];
-                $_SESSION["admin_fullname"]= $row['full_name'];
+                $_SESSION["admin_fullname"]= $row['full_name']; 
                 header("Location:index.php");
             } else {
                 echo "<script>alert('Woops! Email or Password is Wrong.')</script>";

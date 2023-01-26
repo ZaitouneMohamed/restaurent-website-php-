@@ -15,7 +15,7 @@
 
 <div class="main_content">
     <div class="wrapper">
-        <h1>add categorie</h1>
+        <h1 class="text text-center text-primary">add new categorie</h1>
         <br><br>
         
         <form method="POST" enctype="multipart/form-data">
@@ -61,7 +61,6 @@
                 
                 if (isset($_POST["add"])){
                     $title=strip_tags($_POST["title"]);
-                    //radio buttons
                     if (isset($_POST["featured"])){
                         $featured=$_POST["featured"];
                     }
@@ -70,11 +69,11 @@
                     }
                     $filename=$_FILES["img"]["name"];
                     $tmpname=$_FILES["img"]["tmp_name"];
-                    $lblassa="images/";
+                    $lblassa="images/categorie/";
                     move_uploaded_file($tmpname,$lblassa.$filename);
                     
                     $req=mysqli_query($con,"insert into categorie_table (title,image_name,featured,active) values('$title','$filename','$featured','$active')");
-                    header("location: manage_categorie.php");
+                    header("location:manage_categorie.php");
                 }
         ?>
         

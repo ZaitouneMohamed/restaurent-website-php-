@@ -44,21 +44,17 @@ else{
             <h2 class="text-center">Food Menu</h2>
             <?php
             
-            $req_of_search=mysqli_query($con,"SELECT * FROM `food` WHERE title like '%$search%'");
+            $req_of_search=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title like '%$search%'");
             while($row = mysqli_fetch_array($req_of_search)){
                 $id=$row[0];
                 echo ("
                 <div class='food-menu-box'>
                 <div class='food-menu-img'>
-                    <img src='admin/images/$row[4]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
+                    <img src='admin/images/$row[2]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
                 </div>
 
                 <div class='food-menu-desc'>
                     <h4>$row[1]</h4>
-                    <p class='food-price'>$$row[3]</p>
-                    <p class='food-detail'>
-                        $row[2]
-                    </p>
                     <br>
 
                     <a href='order.php?img=$row[4]&title=$row[1]&price=$row[3]' class='btn btn-primary'>Order Now</a>

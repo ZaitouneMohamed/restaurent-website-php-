@@ -22,78 +22,21 @@ else{
 </head>
 
 <body>
-    <!-- Navbar Section Starts Here -->
-    <!-- <section class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="#" title="Logo">
-                    <img src="admin/images/logo.png" alt="Restaurant Logo" class="img-responsive">
-                </a>
-            </div>
-
-            <div class="menu text-right">
-                <ul>
-                    <li>
-                        <a href="index.php">Home</a>
-                    </li>
-                    <li>
-                        <a href="category-foods.php">Categories</a>
-                    </li>
-                    <li>
-                        <a href="foods.php">Foods</a>
-                    </li>
-                    <li>
-                        <a href="contact.php">Contact</a>
-                    </li>
-                    <li>
-                        <a href="my_orders.php">my orders</a>
-                    </li>
-                    <li>
-                    <div class="dropdown show">
-                        <a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                        </div>
-                    </li>
-                    
-                </ul>
-            </div>
-
-            <div class="clearfix"></div>
-        </div>
-    </section> -->
+    
     <?php
         include ("includes/navbar.php");
     ?>
     <!-- Navbar Section Ends Here -->
 <?php
+    $query_get_burger=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title='categorie 1'");
+    $row_get_burger=mysqli_fetch_array($query_get_burger);
 
-$query_get_burger=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title='burger'");
-$row_get_burger=mysqli_fetch_array($query_get_burger);
+    $query_get_pizza=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title='categorie 2'");
+    $row_get_pizza=mysqli_fetch_array($query_get_pizza);
 
-$query_get_pizza=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title='pizza'");
-$row_get_pizza=mysqli_fetch_array($query_get_pizza);
-
-$query_get_momo=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title='momo'");
-$row_get_momo=mysqli_fetch_array($query_get_momo);
+    $query_get_momo=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title='categorie 3'");
+    $row_get_momo=mysqli_fetch_array($query_get_momo);
 ?>
-    <!-- fOOD sEARCH Section Starts Here -->
-    <!-- <section class="food-search text-center">
-        <div class="container">
-            
-            <form method="POST">
-                <input type="search" name="search" placeholder="Search for Food.." required>
-                <input type="submit" name="submit" value="Search" class="btn btn-primary">
-            </form>
-
-        </div>
-    </section> -->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -104,21 +47,19 @@ $row_get_momo=mysqli_fetch_array($query_get_momo);
     
     <div class="carousel-item active">
         <!-- burger -->
-        <img class="d-block w-100" src="admin/images/<?php echo $row_get_burger[2]?>" alt="First slide" height="550px">
+        <img class="d-block w-100" src="admin/images/categorie/<?php echo $row_get_burger[2]?>" alt="First slide" height="550px">
         <div class="carousel-caption d-none d-md-block">
             <h1><?php echo $row_get_burger[1]?></h1>
         </div>
     </div>
     <div class="carousel-item">
-        <!-- pizza -->
-        <img class="d-block w-100" src="admin/images/<?php echo $row_get_pizza[2]?>" alt="Second slide" height="550px">
+        <img class="d-block w-100" src="admin/images/categorie/<?php echo $row_get_pizza[2]?>" alt="Second slide" height="550px">
         <div class="carousel-caption d-none d-md-block">
             <h1><?php echo $row_get_pizza[1]?></h1>
         </div>
     </div>
     <div class="carousel-item">
-        <!-- momo -->
-        <img class="d-block w-100" src="admin/images/<?php echo $row_get_momo[2]?>" alt="Third slide" height="550px">
+        <img class="d-block w-100" src="admin/images/categorie/<?php echo $row_get_momo[2]?>" alt="Third slide" height="550px">
         <div class="carousel-caption d-none d-md-block">
             <h1><?php echo $row_get_momo[1]?></h1>
         </div>
@@ -143,17 +84,17 @@ $row_get_momo=mysqli_fetch_array($query_get_momo);
     ?>
     <section class="categories">
         <div class="container">
-            <h2 class="text-center">Explore Foods</h2>
+            <h2 class="text-center">Explore Categorie</h2>
             <?php 
             while($row = mysqli_fetch_array($query1)){
             $id=$row[0];
             echo("
-            <a href='#'>
-            <div class='box-3 float-container'>
-                <img src='admin/images/$row[2]' alt='Pizza' class='img-responsive img-curve'>
-                <h3 class='float-text text-white'>$row[1]</h3>
-            </div>
-            </a>
+                <a href='#'>
+                <div class='box-3 float-container'>
+                    <img src='admin/images/categorie/$row[2]' width='150px' height='350px' alt='Pizza' class='img-responsive img-curve'>
+                    <h3 class='float-text text-white'>$row[1]</h3>
+                </div>
+                </a>
             ");
         }?>
             <div class="clearfix"></div>

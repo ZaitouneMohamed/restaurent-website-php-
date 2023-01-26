@@ -14,7 +14,7 @@
 <?php
   if (isset($_POST["hhh"])){
     $search=$_POST["search"];
-    $req_search_food=mysqli_query($con,"SELECT * FROM `food` WHERE title like '%$search%'");
+    $req_search_food=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title like '%$search%'");
     $x=mysqli_num_rows($req_search_food);
     if($x==0){
         echo "<script>alert('hada makaynch')</script>";
