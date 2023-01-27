@@ -1,5 +1,5 @@
-<?php include ('partial/menu.php'); ?>
 <?php
+    include ('partial/menu.php');
     include ('connection.php');
     
     
@@ -11,17 +11,7 @@
             header("location: manage_admin.php");  
         }
     ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
-</head>
-<body>
-    <div class="main_content">
+    <div class="container">
     <div class="wrapper">
         <h1>add admin</h1>
         <form action="" method="post">
@@ -56,5 +46,3 @@
     </div>
     </div>
     <?php include ('partial/footer.php'); ?>
-</body>
-</html>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2022 at 10:38 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.28
+-- Generation Time: Jan 27, 2023 at 01:54 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,14 +32,14 @@ CREATE TABLE `admin_table` (
   `full_name` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin_table`
 --
 
 INSERT INTO `admin_table` (`id`, `full_name`, `username`, `password`) VALUES
-(37, 'mohamed zaitoune', 'zaitoune_37', 'wydad@1937');
+(37, 'admin', 'admin', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 -- --------------------------------------------------------
 
@@ -53,16 +53,16 @@ CREATE TABLE `categorie_table` (
   `image_name` varchar(100) NOT NULL,
   `featured` varchar(100) NOT NULL,
   `active` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categorie_table`
 --
 
 INSERT INTO `categorie_table` (`id`, `title`, `image_name`, `featured`, `active`) VALUES
-(1, 'burger', 'menu-burger.jpg', 'yes', 'yes'),
-(2, 'momo', 'menu-momo.jpg', 'yes', 'yes'),
-(3, 'pizza', 'menu-pizza.jpg', 'yes', 'yes');
+(14, 'categorie 1', 'product1.png', 'yes', 'yes'),
+(15, 'categorie 2', 'product4.png', 'yes', 'yes'),
+(16, 'categorie 3', 'brand1.png', 'yes', 'yes');
 
 -- --------------------------------------------------------
 
@@ -79,7 +79,14 @@ CREATE TABLE `food` (
   `categorie_id` int(11) NOT NULL,
   `freatured` varchar(100) NOT NULL,
   `active` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `food`
+--
+
+INSERT INTO `food` (`id`, `title`, `description`, `price`, `image_name`, `categorie_id`, `freatured`, `active`) VALUES
+(4, 'title 1', 'hsfgzeugezg', 14, 'product2.png', 15, 'yes', 'yes');
 
 -- --------------------------------------------------------
 
@@ -99,7 +106,53 @@ CREATE TABLE `order` (
   `customar_contact` varchar(100) NOT NULL,
   `customar_email` varchar(50) NOT NULL,
   `customar_adresse` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_client`
+--
+
+CREATE TABLE `tbl_client` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `username` varchar(40) NOT NULL,
+  `question` varchar(40) NOT NULL,
+  `answer` varchar(50) NOT NULL,
+  `mobile` varchar(20) NOT NULL,
+  `password` varchar(300) NOT NULL,
+  `adresse` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_client`
+--
+
+INSERT INTO `tbl_client` (`id`, `email`, `username`, `question`, `answer`, `mobile`, `password`, `adresse`) VALUES
+(1, 'user@user.com', 'zaitoune_05', 'gj..', 'ef33778f5cce7c2968078d241a7da154', '0700260091', '5f4dcc3b5aa765d61d8327deb882cf99', 'adresse 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_msg`
+--
+
+CREATE TABLE `tbl_msg` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `msg` text NOT NULL,
+  `status` int(11) NOT NULL,
+  `date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_msg`
+--
+
+INSERT INTO `tbl_msg` (`id`, `name`, `email`, `msg`, `status`, `date`) VALUES
+(1, 'name', 'email@email.com', 'hfesj;fvbfuydsfjh', 1, 2023);
 
 --
 -- Indexes for dumped tables
@@ -131,6 +184,18 @@ ALTER TABLE `order`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_client`
+--
+ALTER TABLE `tbl_client`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_msg`
+--
+ALTER TABLE `tbl_msg`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -144,19 +209,31 @@ ALTER TABLE `admin_table`
 -- AUTO_INCREMENT for table `categorie_table`
 --
 ALTER TABLE `categorie_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_client`
+--
+ALTER TABLE `tbl_client`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_msg`
+--
+ALTER TABLE `tbl_msg`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

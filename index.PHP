@@ -89,7 +89,7 @@ else{
             while($row = mysqli_fetch_array($query1)){
             $id=$row[0];
             echo("
-                <a href='#'>
+                <a href='food_of_categorie.php?id=$row[0]'>
                 <div class='box-3 float-container'>
                     <img src='admin/images/categorie/$row[2]' width='150px' height='350px' alt='Pizza' class='img-responsive img-curve'>
                     <h3 class='float-text text-white'>$row[1]</h3>
