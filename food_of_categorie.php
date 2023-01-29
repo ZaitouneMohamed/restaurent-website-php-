@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<?php 
+<?php
 include('admin/connection.php');
-session_start(); 
-if(!isset($_SESSION["username"])){
+session_start();
+if (!isset($_SESSION["username"])) {
     header("location:login.php");
 }
-    $categorie_id=$_GET["id"];
+$categorie_id = $_GET["id"];
 ?>
 <html lang="en">
 
@@ -22,7 +22,7 @@ if(!isset($_SESSION["username"])){
 <body>
     <!-- Navbar Section Starts Here -->
     <?php
-        include ("includes/navbar.php");
+    include("includes/navbar.php");
     ?>
     <!-- Navbar Section Ends Here -->
 
@@ -35,39 +35,34 @@ if(!isset($_SESSION["username"])){
         </div>
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
+    <?php
 
-
-
-    <!-- fOOD MEnu Section Starts Here -->
-    <!-- <section class="food-menu">
-        <div class="container">
-            <h2 class="text-center">Food Menu</h2>
-            <?php
-            
-            $req_of_search=mysqli_query($con,"SELECT * FROM `food` WHERE categorie_id = $categorie_id");
-            while($row = mysqli_fetch_array($req_of_search)){
-                $id=$row[0];
-                echo ("
+    $req_of_search = mysqli_query($con, "SELECT * FROM `food` WHERE categorie_id = '$categorie_id' ");
+    while ($row = mysqli_fetch_array($req_of_search)) {
+        $id = $row[0];
+        echo ("
                 <div class='food-menu-box'>
                 <div class='food-menu-img'>
-                    <img src='admin/images/$row[2]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
+                    <img src='admin/images/$row[4]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
                 </div>
 
                 <div class='food-menu-desc'>
                     <h4>$row[1]</h4>
+                    <h2>$row[2]</h2>
+                    <h2>$row[3]$</h2>
                     <br>
 
-                    <a href='order.php?img=$row[4]&title=$row[1]&price=$row[3]' class='btn btn-primary'>Order Now</a>
+                    <a href='order.php?id=$row[0]' class='btn btn-primary'>Order Now</a>
                 </div>
             </div>");
-            }
-            
-            ?>
-            <div class="clearfix"></div>
+    }
 
-            
+    ?>
+    <div class="clearfix"></div>
 
-        </div>
+
+
+    </div>
 
     </section> -->
 

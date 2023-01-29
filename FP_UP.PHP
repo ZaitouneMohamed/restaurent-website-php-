@@ -23,8 +23,8 @@ if (isset($_POST['submit'])) {
 	<link rel="stylesheet" type="text/css" href="css/login_css.css">
 	<title>Login Form</title>
 </head>
-<body>
-	<div class="container">
+<body >
+	<div class="container" style="background-color: white;">
 		<form method="POST" class="login-email">
 			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Update Password</p>
 			<div class="input-group">
