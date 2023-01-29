@@ -50,7 +50,7 @@ else{
                 ("
                 <div class='food-menu-box'>
                     <div class='food-menu-img'>
-                        <img src='admin/images/$row[2]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
+                        <img src='admin/images/categorie/$row[2]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
                     </div>
 
                     <div class='food-menu-desc'>

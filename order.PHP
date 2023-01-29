@@ -21,12 +21,13 @@
     </head>
 
     <body>
-        <!-- Navbar Section Starts Here -->
         <?php
         
         include("includes/navbar.php");
         $req_of_search = mysqli_query($con, "SELECT * FROM `food` WHERE id = $food_id ");
+        $req_of_user = mysqli_query($con, "SELECT * FROM `tbl_client` WHERE username = '$username' ");
         $row = mysqli_fetch_array($req_of_search);
+        $user = mysqli_fetch_array($req_of_user);
         echo ("
             <form class='order' method='post'>
                     <fieldset>
@@ -40,7 +41,7 @@
                         <h3>$row[1] </h3>
                         <p class='food-price'>$$row[3]</p>
                             <div class='order-label'>Quantity</div>
-                            <input type='number' name='qua' class='input-responsive' value='1' required>
+                            <input type='number' name='qty' class='input-responsive' value='1' required>
                         </div>
                     </fieldset>
 
@@ -50,29 +51,45 @@
                         <?php
                         $query_get_values = mysqli_query($con, "SELECT `mobile`, `adresse` FROM `tbl_client` WHERE username='$username'");
 
-                        $row = mysqli_fetch_array($query_get_values);
-                        if ($row[0] == "null" || $row[1] == "null") {
+                        $roww = mysqli_fetch_array($query_get_values);
+                        if ($roww[0] == "null" || $roww[1] == "null") {
                             echo ("
                                     <div class='order-label'>Phone Number</div>
                                     <input type='tel' name='contact' placeholder='E.g. 9843xxxxxx' class='input-responsive' required>
                                     <div class='order-label'>Address</div>
                                     <textarea name='address' rows='10' placeholder='E.g. Street, City, Country' class='input-responsive' required></textarea>
-                                    <input type='submit' name='submit' value='Confirm Order' class='btn btn-primary'> 
+                                    <input type='submit' name='confirm_order' value='Confirm Order' class='btn btn-primary'> 
                                 ");
                         } else {
 
                             echo ("
                                         <div class='order-label'>Phone Number</div>
-                                        <input type='tel' name='contact' value='$row[0]' class='input-responsive' required>
+                                        <input type='tel' name='contact' value='$roww[0]' class='input-responsive' required>
                                         <div class='order-label'>Address</div>
-                                        <textarea name='address' rows='10'  class='input-responsive' required>$row[1]</textarea>
-                                        <input type='submit' name='submit' value='Confirm Order' class='btn btn-primary'> 
+                                        <textarea name='address' rows='10'  class='input-responsive' required>$roww[1]</textarea>
+                                        <input type='submit' name='confirm_order' value='Confirm Order' class='btn btn-primary'> 
                                     ");
                         }
                         ?>
                     </fieldset>
                 </form>
 
+
+                <?php
+                
+                        if (isset($_POST['confirm_order'])) {
+                            $qty = $_POST['qty'];
+                            $total = $qty * $row[3];
+                            $date_now=date("Y-m-d / h:i:sa");
+                            $order_query = mysqli_query($con,"INSERT INTO `orders`( `qty`, `total`, `order_date`, `statue`, `user_ID`, `food_ID`) 
+                                                              VALUES ('$qty','$total','$date_now','on load','$user[0]','$food_id')");
+                            if ($order_query) {
+                                // echo '<script>alert("all good")</script>';
+                                echo ' <script> location.replace("my_orders.php"); </script>';
+                            }
+                        }
+
+                ?>
 
         <!-- fOOD sEARCH Section Ends Here -->
 
