@@ -14,10 +14,13 @@ else{
 
     <?php
         if (isset($_POST["submit"])){
-            $name=$_POST["name"];
-            $email=$_POST["email"];
             $msg=$_POST["text"];
-            $req=mysqli_query($con,"INSERT INTO `tbl_msg`(`name`, `email`, `msg`, `status`,`date`) VALUES ('$name','$email','$msg','0','$date')");
+            $id = $_SESSION['user_id'];
+            $date = date("Y-m-d h:i:sa");
+            $req=mysqli_query($con,"INSERT INTO `messages`(`user_id`, `content`, `statue`) VALUES ('$id','$msg','0')");
+            if ($req) {
+                echo '<script>alert("thank you a sat")</script>';
+            };
         }
     ?>
 
@@ -47,8 +50,6 @@ else{
             <marquee><h1>share with us your upinion</h1></marquee>
             <form method="POST">    
                 <center>
-                    <input name="name" type="text" class="feedback-input" placeholder="Name" /><br>
-                    <input name="email" type="text" class="feedback-input" placeholder="Email" /><br>
                     <textarea name="text" id="" cols="30" rows="10"></textarea><br>
                     <input type="submit" value="send message" name="submit" class="btn"/>
                 </center>

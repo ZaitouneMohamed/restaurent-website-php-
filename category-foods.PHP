@@ -1,10 +1,6 @@
 <?php
 include('admin/connection.php');
-session_start(); 
-if(!isset($_SESSION["username"])){
-    header("location:login.php");
-}
-else{
+session_start();
     $query_get_categorie=mysqli_query($con,"SELECT * FROM `categorie_table` ");
     
 ?>
@@ -97,4 +93,3 @@ else{
 
 </body>
 </html>
-<?php }?>

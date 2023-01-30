@@ -2,9 +2,9 @@
 <?php
 include('admin/connection.php');
 session_start();
-if (!isset($_SESSION["username"])) {
-    header("location:login.php");
-}
+// if (!isset($_SESSION["username"])) {
+//     header("location:login.php");
+// }
 $categorie_id = $_GET["id"];
 ?>
 <html lang="en">

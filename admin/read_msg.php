@@ -16,14 +16,13 @@ $id=$_GET["id"];
 </head>
 <body>
 <?php
-    $query=mysqli_query($con,"SELECT * FROM `tbl_msg` where id=$id");
+    $query=mysqli_query($con,"select m.* , u.username from messages m join tbl_client u on m.user_id=u.id where m.id = $id");
     $x=mysqli_fetch_array($query);
 ?>
 
-<div class="main_content">
-    <h1><?php echo $x[1]; ?></h1>
-    <div style="display:flex"><h2><?php echo $x[2]; ?></h2> <i><?php echo $x[5]; ?></i></div>
-    <p><?php echo $x[3]; ?></p>
+<div class="container">
+    <h1><?php echo $x[5]; ?></h1>
+    <div style="display:flex"><h2><?php echo $x[2]; ?></h2> <i><?php echo $x[3]; ?></i></div>
 </div>
 
 </body>
@@ -31,5 +30,5 @@ $id=$_GET["id"];
 
 <?php include ('partial/footer.php'); ?>
 <?php
-    $updqte_query=mysqli_query($con,"UPDATE `tbl_msg` SET `status`='1' WHERE `id`='$id'");
+    $updqte_query=mysqli_query($con,"UPDATE `messages` SET `statue`='1' WHERE `id`='$id'");
 ?>

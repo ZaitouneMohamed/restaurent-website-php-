@@ -2,10 +2,9 @@
 include('admin/connection.php');
 ob_start();
 session_start(); 
-if(!isset($_SESSION["username"])){
-    header("location:login.php");
-}
-else{
+// if(!isset($_SESSION["username"])){
+//     header("location:login.php");
+// }
     //error_reporting(0);
 ?>
 <!DOCTYPE html>
@@ -173,4 +172,3 @@ else{
 
 </body>
 </html>
-<?php }?>

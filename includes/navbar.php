@@ -14,7 +14,7 @@
 <?php
   if (isset($_POST["hhh"])){
     $search=$_POST["search"];
-    $req_search_food=mysqli_query($con,"SELECT * FROM `categorie_table` WHERE title like '%$search%'");
+    $req_search_food=mysqli_query($con,"SELECT * FROM `food` WHERE title like '%$search%'");
     $x=mysqli_num_rows($req_search_food);
     if($x==0){
         echo "<script>alert('hada makaynch')</script>";
@@ -49,17 +49,30 @@
         <a class="nav-link" href="my_orders.php">my orders <span class="sr-only">(current)</span></a>
       </li>
       
+      <?php 
+      if (isset($_SESSION['username'])) {
+          echo ('
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           ');echo $_SESSION["username"];
+           echo ('
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="profil.php">profile</a>
+            <a class="dropdown-item" href="update_profile.php">manage profile</a>
+            <a class="dropdown-item" href="logout.php">log out</a>
+          </div>
+        </li>    
+          ');
+      }else{
+        echo('
+          <a href="login.php" class="btn btn-primary">log in</a>
+          <a href="register.php" class="btn btn-success">register</a>
+        ');
+      }
       
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <?php echo $_SESSION['username'];?>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="profil.php">profile</a>
-          <a class="dropdown-item" href="update_profile.php">manage profile</a>
-          <a class="dropdown-item" href="logout.php">log out</a>
-        </div>
-      </li>
+      ?>
+      
     </ul>
     <form class="d-flex" role="search" method="post">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
