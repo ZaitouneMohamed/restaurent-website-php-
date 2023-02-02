@@ -7,7 +7,7 @@
     $r=mysqli_query($con,"select * from tbl_client");
 ?>
 <div class="container">
-    <a href="add_food.php" class="btn btn-primary">Add User</a>
+    <a href="add_user.php" class="btn btn-primary">Add User</a>
     <br><br>
 
     <table class="table table-hover">
