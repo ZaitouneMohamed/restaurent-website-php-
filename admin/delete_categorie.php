@@ -10,7 +10,6 @@
     if ($row = mysqli_fetch_array($req2)) {
         $image = $row['image_name'];
     }
-    echo $image;
     $folder = "images/categorie/";
     unlink($folder.$image);
 

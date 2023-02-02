@@ -1,6 +1,5 @@
 <?php include('admin/connection.php');
     $food_id = $_GET["id"];
-    date_default_timezone_set("Africa/Casablanca");
     session_start();
     if (!isset($_SESSION["username"])) {
         header("location:login.php");
@@ -84,7 +83,6 @@
                             $order_query = mysqli_query($con,"INSERT INTO `orders`( `qty`, `total`, `order_date`, `statue`, `user_ID`, `food_ID`) 
                                                               VALUES ('$qty','$total','$date_now','on load','$user[0]','$food_id')");
                             if ($order_query) {
-                                // echo '<script>alert("all good")</script>';
                                 echo ' <script> location.replace("my_orders.php"); </script>';
                             }
                         }

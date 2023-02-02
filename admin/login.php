@@ -14,7 +14,6 @@
             if ($result->num_rows > 0) {
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['admin_username'] = $row['username'];
-                $_SESSION['username'] = $row['username'];
                 $_SESSION["admin_fullname"]= $row['full_name']; 
                 header("Location:index.php");
             } else {

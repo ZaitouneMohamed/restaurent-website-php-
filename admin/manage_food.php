@@ -34,14 +34,14 @@
                             <td> $row[1] </td>
                             <td> $row[2] </td>
                             <td> $row[3] </td>
-                            <td> <img src='images/$row[4]' alt='' width='50px' height='50px'> </td>
+                            <td> <img src='images/foods/$row[4]' alt='' width='50px' height='50px'> </td>
                             <td> $row[5] </td>
                             <td> $row[6] </td>
                             <td> $row[7] </td>
                             
                             <td> 
-                                <a href='update_food.php?id=$id' class='btn btn-secondary'>update categorie</a>
-                                <a href='delete_food.php?id=$id' class='btn btn-primary'>delete categorie</a>
+                                <a href='update_food.php?id=$id' class='btn btn-warning'>update food</a>
+                                <a href='delete_food.php?id=$id' class='btn btn-danger'>delete food</a>
                             </td>
                             </tr>");
                             

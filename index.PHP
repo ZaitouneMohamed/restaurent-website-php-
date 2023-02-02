@@ -118,12 +118,12 @@ session_start();
                 </div>
                 <div class='food-menu-desc'>
                     <h4>$row2[2]</h4>
-                    <p class='food-price'>$.$row2[3]</p>
+                    <p class='food-price'>$$row2[3]</p>
                     <p class='food-detail'>
                         $row2[4]
                     </p>
                     <br>
-                    <a href='order.php?img=$row2[1]&title=$row2[2]&price=$row2[3].00' class='btn btn-primary'>Order Now</a>
+                    <a href='order.php?id=$row2[0]' class='btn btn-primary'>Order Now</a>
                 </div>
                 </div>
                 ");

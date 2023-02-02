@@ -1,38 +1,37 @@
 <?php
-    session_start();
-        include ('connection.php');
-        include ('partial/menu.php');
-    $id=$_GET["id"];
-    $query1=mysqli_query($con,"SELECT * FROM `food` WHERE id=$id");
-    $x=mysqli_num_rows($query1);
-    if($x==1){
-        $rows=mysqli_fetch_assoc($query1);
-        $title=$rows["title"];
-        $description=$rows["description"];
-        $price=$rows["price"];
-        $image=$rows["image_name"];
-    }
-    $fill_select=mysqli_query($con,"SELECT id,title FROM `categorie_table`");
+include('connection.php');
+include('partial/menu.php');
+$id = $_GET["id"];
+$query1 = mysqli_query($con, "SELECT * FROM `food` WHERE id=$id");
+$x = mysqli_num_rows($query1);
+if ($x == 1) {
+    $rows = mysqli_fetch_assoc($query1);
+    $title = $rows["title"];
+    $description = $rows["description"];
+    $price = $rows["price"];
+    $image = $rows["image_name"];
+}
+$fill_select = mysqli_query($con, "SELECT id,title FROM `categorie_table`");
 
-    
-    if (isset($_POST["add"])){
-            $image=$_FILES["img"]["name"];
-            $tmpname=$_FILES["img"]["tmp_name"];
-            move_uploaded_file($tmpname,"images/".$image);
-            
-            $title=strip_tags($_POST["title"]);
-            $description=strip_tags($_POST["description"]);
-            $price=strip_tags($_POST["price"]);
-            $categorie=strip_tags($_POST["categorie"]);
-            if (isset($_POST["featured"])){
-                $featured=$_POST["featured"];
-            }
-            if (isset($_POST["active"])){
-                $active=$_POST["active"];
-            }
-            $query2=mysqli_query($con,"UPDATE `food` SET `title` = '$title', `description` = '$description', `price` = '$price', `image_name` = '$image', `categorie_id` = '$categorie', `freatured` = '$featured', `active` = '$active' WHERE `food`.`id` = $id; ");
-            header("location: manage_food.php");
+
+if (isset($_POST["add"])) {
+    $image = $_FILES["img"]["name"];
+    $tmpname = $_FILES["img"]["tmp_name"];
+    move_uploaded_file($tmpname, "images/foods/" . $image);
+
+    $title = strip_tags($_POST["title"]);
+    $description = strip_tags($_POST["description"]);
+    $price = strip_tags($_POST["price"]);
+    $categorie = strip_tags($_POST["categorie"]);
+    if (isset($_POST["featured"])) {
+        $featured = $_POST["featured"];
     }
+    if (isset($_POST["active"])) {
+        $active = $_POST["active"];
+    }
+    $query2 = mysqli_query($con, "UPDATE `food` SET `title` = '$title', `description` = '$description', `price` = '$price', `image_name` = '$image', `categorie_id` = '$categorie', `freatured` = '$featured', `active` = '$active' WHERE `food`.`id` = $id; ");
+    echo ' <script> location.replace("manage_food.php"); </script>';
+}
 ?>
 
 <div class="main_content">
@@ -70,9 +69,9 @@
                     <td>
                         <select name="categorie" id="">
                             <?php
-                                while ($row=mysqli_fetch_array($fill_select)){
-                                    echo("<option value='$row[0]'>$row[1]</option>");
-                                }
+                            while ($row = mysqli_fetch_array($fill_select)) {
+                                echo ("<option value='$row[0]'>$row[1]</option>");
+                            }
                             ?>
                             <!-- <option value=""></option>
                             <option value=""></option>
@@ -94,20 +93,20 @@
                         <input type="radio" name="active" id="" value="no">No
                     </td>
                 </tr>
-                
+
                 <tr>
                     <td>
-                        <input type="submit" value="submit" name="add" class="btn btn-success">                    
-                    </td>  
-                    
+                        <input type="submit" value="submit" name="add" class="btn btn-success">
+                    </td>
+
                 </tr>
-                
+
             </table>
-            
+
         </form>
     </div>
-    </div>
+</div>
 
 <?php
-    ;include ('partial/footer.php');
+include('partial/footer.php');
 ?>

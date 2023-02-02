@@ -12,7 +12,7 @@
                     // image
                     $filename=$_FILES["img"]["name"];
                     $tmpname=$_FILES["img"]["tmp_name"];
-                    $lblassa="images/";
+                    $lblassa="images/foods/";
                     move_uploaded_file($tmpname,$lblassa.$filename);
                     // radio buttons
                     $categorie=$_POST["categorie"];
@@ -25,7 +25,7 @@
                     
                     
                     $req=mysqli_query($con,"insert into food (title,description,price,image_name,categorie_id,freatured,active) values('$title','$description','$price','$filename','$categorie','$featured','$active')");
-                    header("location: manage_food.php");
+                    echo ' <script> location.replace("manage_food.php"); </script>';
                 }
         ?>
 <!DOCTYPE html>
@@ -39,7 +39,7 @@
 </head>
 <body>
 
-<div class="main_content">
+<div class="container">
     <div class="wrapper">
         <h1>add food</h1>
         <br><br>
