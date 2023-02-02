@@ -4,7 +4,7 @@
 ?>
 <?php
 
-    $r=mysqli_query($con,"select * from food");
+    $r=mysqli_query($con,"select f.* , c.title from food f join categorie_table c on f.categorie_id = c.id");
 ?>
 <div class="container">
     <a href="add_food.php" class="btn btn-primary">Add Food</a>
@@ -33,9 +33,9 @@
                             echo ("<td> $row[0] </td>
                             <td> $row[1] </td>
                             <td> $row[2] </td>
-                            <td> $row[3] </td>
+                            <td> $row[3]$ </td>
                             <td> <img src='images/foods/$row[4]' alt='' width='50px' height='50px'> </td>
-                            <td> $row[5] </td>
+                            <td> $row[8] </td>
                             <td> $row[6] </td>
                             <td> $row[7] </td>
                             

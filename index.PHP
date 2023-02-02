@@ -103,7 +103,7 @@ session_start();
 
     <!-- fOOD MEnu Section Starts Here -->
     <?php 
-        $req_menu=mysqli_query($con,"SELECT categorie_id,image_name,title,price,description FROM `food` limit 6")
+        $req_menu=mysqli_query($con,"SELECT * FROM `food` limit 6")
     ?>
     <section class="food-menu">
         <div class="container">
@@ -114,16 +114,16 @@ session_start();
                 echo ("
                 <div class='food-menu-box'>
                 <div class='food-menu-img'>
-                    <img src='admin/images/$row2[1]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
+                    <img src='admin/images/foods/$row2[4]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
                 </div>
                 <div class='food-menu-desc'>
-                    <h4>$row2[2]</h4>
+                    <h4>$row2[1]</h4>
                     <p class='food-price'>$$row2[3]</p>
                     <p class='food-detail'>
-                        $row2[4]
+                        $row2[2]
                     </p>
                     <br>
-                    <a href='order.php?id=$row2[0]' class='btn btn-primary'>Order Now</a>
+                    <a href='order.php?id=$id' class='btn btn-primary'>Order Now</a>
                 </div>
                 </div>
                 ");
