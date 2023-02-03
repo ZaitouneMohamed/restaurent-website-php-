@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2023 at 01:54 PM
+-- Generation Time: Feb 03, 2023 at 07:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -61,7 +61,6 @@ CREATE TABLE `categorie_table` (
 
 INSERT INTO `categorie_table` (`id`, `title`, `image_name`, `featured`, `active`) VALUES
 (14, 'categorie 1', 'product1.png', 'yes', 'yes'),
-(15, 'categorie 2', 'product4.png', 'yes', 'yes'),
 (16, 'categorie 3', 'brand1.png', 'yes', 'yes');
 
 -- --------------------------------------------------------
@@ -86,26 +85,44 @@ CREATE TABLE `food` (
 --
 
 INSERT INTO `food` (`id`, `title`, `description`, `price`, `image_name`, `categorie_id`, `freatured`, `active`) VALUES
-(4, 'title 1', 'hsfgzeugezg', 14, 'product2.png', 15, 'yes', 'yes');
+(7, 'titre', 'sefvbgerkjgh', 2, 'product5.png', 14, 'yes', 'yes');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order`
+-- Table structure for table `messages`
 --
 
-CREATE TABLE `order` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `food` varchar(100) NOT NULL,
-  `price` decimal(10,0) NOT NULL,
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `content` varchar(100) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `statue` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`id`, `user_id`, `content`, `date`, `statue`) VALUES
+(3, 1, 'buyregreè_', '2023-01-30 15:10:28', 1),
+(4, 1, 'fgyuetrer\r\n', '2023-02-02 14:05:53', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `ID` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
-  `total` decimal(10,0) NOT NULL,
-  `order_date` datetime NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `customar_name` varchar(100) NOT NULL,
-  `customar_contact` varchar(100) NOT NULL,
-  `customar_email` varchar(50) NOT NULL,
-  `customar_adresse` varchar(200) NOT NULL
+  `total` int(11) NOT NULL,
+  `order_date` int(11) NOT NULL,
+  `statue` varchar(20) NOT NULL,
+  `User_ID` int(11) DEFAULT NULL,
+  `food_ID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -130,29 +147,8 @@ CREATE TABLE `tbl_client` (
 --
 
 INSERT INTO `tbl_client` (`id`, `email`, `username`, `question`, `answer`, `mobile`, `password`, `adresse`) VALUES
-(1, 'user@user.com', 'zaitoune_05', 'gj..', 'ef33778f5cce7c2968078d241a7da154', '0700260091', '5f4dcc3b5aa765d61d8327deb882cf99', 'adresse 1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_msg`
---
-
-CREATE TABLE `tbl_msg` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `msg` text NOT NULL,
-  `status` int(11) NOT NULL,
-  `date` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_msg`
---
-
-INSERT INTO `tbl_msg` (`id`, `name`, `email`, `msg`, `status`, `date`) VALUES
-(1, 'name', 'email@email.com', 'hfesj;fvbfuydsfjh', 1, 2023);
+(1, 'user@user.com', 'zaitoune_05', 'gj..', 'ef33778f5cce7c2968078d241a7da154', '0700260091', '5f4dcc3b5aa765d61d8327deb882cf99', 'adresse 1'),
+(3, 'sadmin@admin.com', 'username', '', '', '0700260091', '5f4dcc3b5aa765d61d8327deb882cf99', 'adresse here');
 
 --
 -- Indexes for dumped tables
@@ -178,21 +174,24 @@ ALTER TABLE `food`
   ADD KEY `c1` (`categorie_id`);
 
 --
--- Indexes for table `order`
+-- Indexes for table `messages`
 --
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `User_ID` (`User_ID`),
+  ADD KEY `food_ID` (`food_ID`);
 
 --
 -- Indexes for table `tbl_client`
 --
 ALTER TABLE `tbl_client`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_msg`
---
-ALTER TABLE `tbl_msg`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -215,25 +214,25 @@ ALTER TABLE `categorie_table`
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `order`
+-- AUTO_INCREMENT for table `orders`
 --
-ALTER TABLE `order`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `orders`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_client`
 --
 ALTER TABLE `tbl_client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_msg`
---
-ALTER TABLE `tbl_msg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -244,6 +243,19 @@ ALTER TABLE `tbl_msg`
 --
 ALTER TABLE `food`
   ADD CONSTRAINT `c1` FOREIGN KEY (`categorie_id`) REFERENCES `categorie_table` (`id`);
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tbl_client` (`id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`User_ID`) REFERENCES `tbl_client` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`food_ID`) REFERENCES `food` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
