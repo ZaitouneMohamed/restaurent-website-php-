@@ -28,21 +28,20 @@ if (!isset($_SESSION["username"])) {
     <section class="my_orders">
         <div class="container">
             <h1><?php echo $_SESSION["username"] ?> orders</h1>
-
-
+            <div class="row">
 
             <?php
             $id = $_SESSION["user_id"];
             $query_select_orders = mysqli_query($con, "SELECT orders.* , food.* from orders JOIN food ON food.id=orders.food_ID  where User_ID = $id ");
-            ?>
-            <?php
+            
             while ($row = mysqli_fetch_array($query_select_orders)) {
                 $id = $row[0];
                 echo ("
+                <div class='col-3'>
         <div class='card mb-3' style='max-width: 540px;position:relative;left:30%'>
         <div class='row g-0'>
             <div class='col-md-4'>
-                <img src='admin/images/$row[11]' class='img-fluid rounded-start' alt=''>
+                <img src='admin/images/foods/$row[11]' class='img-fluid rounded-start' alt=''>
                 <p class='card-text'>status : <i><b>$row[4]</b></i></p>
             </div>
             <div class='col-md-8'>
@@ -52,7 +51,6 @@ if (!isset($_SESSION["username"])) {
                 <p class='card-text'>Total to pay : <b><i>$row[2]$</i></b></p>
                 <p class='card-text'>orderd on : <i><b>$row[3]</b></i></p>");
                 if ($row[4] == "on load") {
-
                     echo ("
                         <a href='delete_order.php?id=$id' class='btn btn-danger'>delete order</a>
                     ");
@@ -62,9 +60,11 @@ if (!isset($_SESSION["username"])) {
             </div>
         </div>
         </div>
+        </div>
         ");
             }
             ?>
+            </div>
 
             <!-- <div class="card mb-3" style="max-width: 540px;position:relative;left:30%">
   <div class="row g-0">

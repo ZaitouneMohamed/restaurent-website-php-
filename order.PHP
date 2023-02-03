@@ -33,7 +33,7 @@
                         <legend>Selected Food</legend>
 
                         <div class='food-menu-img'>
-                            <img src='admin/images/$row[4]'class='img-responsive img-curve'>
+                            <img src='admin/images/foods/$row[4]'class='img-responsive img-curve'>
                         </div>
 
                         <div class='food-menu-desc'>

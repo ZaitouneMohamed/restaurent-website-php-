@@ -4,7 +4,6 @@ session_start();
 if(!isset($_SESSION["username"])){
     header("location:login.php");
 }
-else{
     $id=$_GET["id"];
     $query_get_food=mysqli_query($con,"SELECT * FROM `food` WHERE `categorie_id`=$id ");
 ?>
@@ -40,13 +39,15 @@ else{
     <section class="food-menu">
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
+            <div class="row">
+
             <?php
             while($row2=mysqli_fetch_array($query_get_food)){
                 $id2=$row2[0];
                 echo ("
-                <div class='food-menu-box'>
+                <div class='col-4'>
                 <div class='food-menu-img'>
-                    <img src='admin/images/$row2[4]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
+                    <img src='admin/images/foods/$row2[4]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
                 </div>
                 <div class='food-menu-desc'>
                     <h4>$row2[1]</h4>
@@ -55,13 +56,13 @@ else{
                         $row2[2]
                     </p>
                     <br>
-                    <a href='order.php?img=$row2[4]&title=$row2[1]&price=$row2[3].00' class='btn btn-primary'>Order Now</a>
+                    <a href='order.php?id=$id2' class='btn btn-primary'>Order Now</a>
                 </div>
                 </div>
                 ");
-
             }
             ?>
+            </div>
             
 
             <div class="clearfix"></div>
@@ -96,4 +97,3 @@ else{
 
 </body>
 </html>
-<?php }?>
