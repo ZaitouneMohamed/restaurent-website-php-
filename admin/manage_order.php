@@ -40,12 +40,11 @@ $req = mysqli_query($con, "select o.* , f.* , u.* from tbl_client u join orders 
                                         <td>$row[2]</td>
                                         <td>$row[3]</td>
                                         <td>$row[17]</td>
-                                        <td><img src='images/$row[11]' width='50px' height='50px'></td>
+                                        <td><img src='images/foods/$row[11]' class='rounded' width='50px' height='50px'></td>
                                         <td>$row[8]</td>
                                         <td>$row[4]</td>
                                         <td><a href='change_statue.php?id=$row[0]&&statue=new statue'  class='btn btn-primary'>change statue</a></td>
-                                    </tr>
-                                                    
+                                    </tr>           
                                      ");
                             }
 
