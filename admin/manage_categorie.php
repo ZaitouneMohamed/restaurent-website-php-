@@ -32,7 +32,7 @@ include ('partial/menu.php'); include('connection.php');
                             echo ("
                             <td> 
                                 <a href='update_categorie.php?id=$id' class='btn btn-warning'>update categorie</a>
-                                <a href='delete_categorie.php?id=$id' class='btn btn-danger'>delete categorie</a>
+                                <a href='delete.php?id=$id&&table=categorie' class='btn btn-danger'>delete categorie</a>
                             </td>
                             ");
                             echo ('</tr>');

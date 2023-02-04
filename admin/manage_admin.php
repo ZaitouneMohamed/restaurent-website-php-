@@ -1,12 +1,12 @@
 <?php
-include ('partial/menu.php'); include ('connection.php');
-    $r=mysqli_query($con,"select * from admin_table");
+include('partial/menu.php');
+include('connection.php');
+$r = mysqli_query($con, "select * from admin_table");
 ?>
 <div class="container">
-    <h1><strong><i><?php echo $_SESSION['admin_fullname'];?></i></strong></h1>
+    <h1><strong><i><?php echo $_SESSION['admin_fullname']; ?></i></strong></h1>
     <br>
-    <!-- <a href="add_admin.php" class="class="btn btn-primary">manage admin</a> -->
-        <a class="btn btn-primary" href="add_admin.php">manage admin</a>
+    <a class="btn btn-primary" href="add_admin.php">Add Admin</a>
     <br><br>
 
     <table class="table table-hover">
@@ -21,27 +21,24 @@ include ('partial/menu.php'); include ('connection.php');
         <tbody>
             <tr>
                 <?php
-                        // echo mysqli_fetch_array($r)[1].'<br>';
-                        
-                        while ($row =  mysqli_fetch_array($r)) {
-                            $id=$row[0];
-                            echo ('<tr>');
-                            echo ("<td> $row[0] </td>");
-                            echo ("<td> $row[1] </td>");
-                            echo ("<td> $row[2] </td>");
-                            echo ("
+                while ($row =  mysqli_fetch_array($r)) {
+                    $id = $row[0];
+                    echo ('<tr>');
+                    echo ("<td> $row[0] </td>");
+                    echo ("<td> $row[1] </td>");
+                    echo ("<td> $row[2] </td>");
+                    echo ("
                             <td> 
-                            <a href='update_admin.php?id=$id' class='btn btn-secondary'>update admin</a>
-                            <a href='delete_admin.php?id=$id' class='btn btn-primary'>delete admin</a>
+                            <a href='update_admin.php?id=$id' class='btn btn-warning'>update admin</a>
+                            <a href='delete.php?id=$id&&table=admin' class='btn btn-danger'>delete admin</a>
                             </td>
                             ");
-                            echo ('</tr>');
-                            
-                        }
-                    ?>
+                    echo ('</tr>');
+                }
+                ?>
 
             </tr>
         </tbody>
     </table>
 </div>
-<?php include ('partial/footer.php'); ?>
+<?php include('partial/footer.php'); ?>

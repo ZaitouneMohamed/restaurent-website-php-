@@ -40,8 +40,9 @@
                             <td> $row[7] </td>
                             
                             <td> 
-                                <a href='update_food.php?id=$id' class='btn btn-warning'>update food</a>
+                                // <a href='update_food.php?id=$id' class='btn btn-warning'>update food</a>
                                 <a href='delete_food.php?id=$id' class='btn btn-danger'>delete food</a>
+                                <a href='delete.php?id=$id&&table=food' class='btn btn-danger'>delete test</a>
                             </td>
                             </tr>");
                             
