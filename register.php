@@ -1,6 +1,6 @@
 <?php 
-include('admin/connection.php');
 session_start();
+include('admin/connection.php');
 
 
 
@@ -18,14 +18,13 @@ if (isset($_POST['submit'])) {
 			$result = mysqli_query($con, $sql);
 			if ($result) {
 				echo "<script>alert('Wow! User Registration Completed.')</script>";
-				$_SESSION["username"]=$username;
-				$_SESSION["email"]=$email;
+                $get = mysqli_query($con,"SELECT * FROM tbl_client WHERE email='$email'");
+                $user = mysqli_fetch_assoc($get);
+				$_SESSION['username'] = $user['username'];
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['email'] = $user['email'];
 				
 				header("location:answer.php");
-				$username = "";
-				$email = "";
-				$_POST['password'] = "";
-				$_POST['cpassword'] = "";
 			} else {
 				echo "<script>alert('Woops! Something Wrong Went.')</script>";
 			}
