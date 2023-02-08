@@ -27,7 +27,7 @@
     }
 ?>
 
-<div class="main_content">
+<div class="container">
     <div class="wrapper">
         <h1>update categorie</h1>
         <form method="post" enctype="multipart/form-data">
