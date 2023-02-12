@@ -3,7 +3,14 @@ include('admin/connection.php');
 ob_start();
 session_start();
 //error_reporting(0);
-// $query1 = $pdo->
+$query1 = $pdo->prepare("SELECT * FROM `categorie_table` LIMIT 3");
+$query1->execute();
+$categories = $query1->fetchAll(PDO::FETCH_ASSOC);
+
+
+$query2 = $pdo->prepare("SELECT * FROM `food` limit 6");
+$query2->execute();
+$foods = $query1->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -78,57 +85,51 @@ session_start();
 
     <!-- CAtegories Section Starts Here -->
     <?php
-    $query1 = mysqli_query($con, "SELECT * FROM `categorie_table` LIMIT 3");
+    // $query1 = mysqli_query($con, "SELECT * FROM `categorie_table` LIMIT 3");
     //$row=mysqli_fetch_assoc($query1);
     ?>
     <section class="categories">
         <div class="container">
             <h2 class="text-center">Explore Categorie</h2>
-            <?php
-            while ($row = mysqli_fetch_array($query1)) {
-                $id = $row[0];
-                echo ("
-                <a href='food_of_categorie.php?id=$row[0]'>
-                <div class='box-3 float-container'>
-                    <img src='admin/images/categorie/$row[2]' width='150px' height='350px' alt='Pizza' class='img-responsive img-curve'>
-                    <h3 class='float-text text-white'>$row[1]</h3>
-                </div>
-                </a>
-            ");
-            } ?>
+            <div class="row">
+                <?php foreach ($categories as $item) : ?>
+                    <div class="col-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="./admin/images/categorie/<?= $item['image_name'] ?>" width="80px" height="200px" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title"><?= $item['title'] ?></h5>
+                                <a href="food_of_categorie.php?id=<?= $item['id'] ?>" class="btn btn-primary">See Food</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach;  ?>
+            </div>
             <div class="clearfix"></div>
         </div>
     </section>
     <!-- Categories Section Ends Here -->
 
     <!-- fOOD MEnu Section Starts Here -->
-    <?php
-    $req_menu = mysqli_query($con, "SELECT * FROM `food` limit 6")
-    ?>
+
     <section class="food-menu">
         <div class="container">
             <h2 class="text-center">Food Menu</h2>
-            <?php
-            while ($row2 = mysqli_fetch_array($req_menu)) {
-                $id2 = $row2[0];
-                echo ("
-                <div class='food-menu-box'>
-                <div class='food-menu-img'>
-                    <img src='admin/images/foods/$row2[4]' alt='Chicke Hawain Pizza' class='img-responsive img-curve'>
-                </div>
-                <div class='food-menu-desc'>
-                    <h4>$row2[1]</h4>
-                    <p class='food-price'>$$row2[3]</p>
-                    <p class='food-detail'>
-                        $row2[2]
-                    </p>
-                    <br>
-                    <a href='order.php?id=$id' class='btn btn-primary'>Order Now</a>
-                </div>
-                </div>
-                ");
-            }
-            ?>
+            <div class="row">
+                <?php foreach ($foods as $food) :  ?>
+                    <div class="col-3">
+                        <div class="card" style="width: 18rem;">
+                            <img src="./admin/images/foods/<?= $food['image_name'] ?>" width="80px" height="200px" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title"><?= $food['title'] ?></h5>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach;  ?>
+            </div>
+
+
+
 
             <div class="clearfix"></div>
         </div>
