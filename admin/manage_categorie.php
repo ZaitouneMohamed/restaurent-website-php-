@@ -1,52 +1,37 @@
 <?php
-include ('partial/menu.php'); include('connection.php'); 
-    $r=mysqli_query($con,"select * from categorie_table");
+    include('functions.php');
+    $pdo = pdo_connect_mysql();
+    $query = $pdo->prepare('SELECT * FROM categorie_table');
+    $query->execute();
+    $categories = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
-    <div class="container">
-            <a href="add_categorie.php" class="btn btn-primary">add categorie</a>
-            <br><br>
+<?= navbar(); ?>
+<div class="container">
+<a href="../admin/add_categorie.php" class="btn btn-success">Add New categorie</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Full name</th>
+            <th scope="col">Username</th>
+            <th scope="col">action</th>
 
-            <table class="table table-hover">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">title</th>
-                        <th scope="col">image name</th>
-                        <th scope="col">featured</th>
-                        <th scope="col">active</th>
-                        <th scope="col">action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <?php
-                        // echo mysqli_fetch_array($r)[1].'<br>';
-                        while ($row =  mysqli_fetch_array($r)) {
-                            $id=$row[0];
-                            echo ('<tr>');
-                            echo ("<td> $row[0] </td>");
-                            echo ("<td> $row[1] </td>");
-                            echo ("<td> <img src='images/categorie/$row[2]' alt='' width='50px' height='50px'> </td>");
-                            echo ("<td> $row[3] </td>");
-                            echo ("<td> $row[4] </td>");
-                            echo ("
-                            <td> 
-                                <a href='update_categorie.php?id=$id' class='btn btn-warning'>update categorie</a>
-                                <a href='delete.php?id=$id&&table=categorie' class='btn btn-danger'>delete categorie</a>
-                            </td>
-                            ");
-                            echo ('</tr>');
-                            
-                        }
-                    ?>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($categories as $item) : ?>
+            <tr>
+                <th scope="row"><?= $item['id'] ?></th>
+                <th><?= $item['title'] ?></th>
+                <th> <img src="../admin/images/categorie/<?= $item['image_name'] ?>" width="50px" height="50px" alt=""></th>
+                <th><?= $item['featured'] ?></th>
+                <th><?= $item['active'] ?></th>
+                <th>
+                    <a href="delete_admin.php?id=<?= $item['id'] ?>" class="btn btn-danger">delete</a>
+                </th>
+            </tr>
+    </tbody>
+</div>
+        <?php endforeach; ?>
 
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    <?php ;include ('partial/footer.php'); ?>
-
-</body>
-
-</html>
+        <?php footer() ?>
