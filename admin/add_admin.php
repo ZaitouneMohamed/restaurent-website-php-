@@ -1,16 +1,23 @@
 <?php
-    include ('partial/menu.php');
-    include ('connection.php');
-    
-    
-        if (isset($_POST["submit"])){
-            $full_name=strip_tags($_POST["full_name"]);
-            $username=strip_tags($_POST["username"]);
-            $password=md5($_POST["password"]);
-            $req = mysqli_query($con,"insert into admin_table (full_name,username,password) values('$full_name','$username','$password')");
-            header("location: manage_admin.php");  
-        }
-    ?>
+    include('functions.php');
+?>
+<?= navbar(); ?>
+<?php
+
+if (isset($_POST["submit"])){
+    $full_name=strip_tags($_POST["full_name"]);
+    $username=strip_tags($_POST["username"]);
+    $password=md5($_POST["password"]);
+    // addadmin($full_name,$username,$password);
+    $pdo = pdo_connect_mysql();
+    $query = $pdo->prepare('INSERT INTO admin_table (full_name,username,password) values(?,?,?)');
+    $query->execute([$full_name]);
+    $query->execute([$username]);
+    $query->execute([md5($password)]);
+    header("location:manage_admin.php");  
+}
+
+?>
     <div class="container">
     <div class="wrapper">
         <h1>add admin</h1>
@@ -37,12 +44,12 @@
                 <tr>
                     
                     <td>
-                            <input type="submit" value="submit" name="submit">
+                        <input type="submit" value="submit" name="submit">
                     </td>
                 </tr>
                 
             </table>
         </form>
     </div>
-    </div>
-    <?php include ('partial/footer.php'); ?>
+</div>
+<?= footer(); ?>

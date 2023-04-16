@@ -1,44 +1,32 @@
 <?php
-include('partial/menu.php');
-include('connection.php');
-$r = mysqli_query($con, "select * from admin_table");
+    include('functions.php');
+    $pdo = pdo_connect_mysql();
+    $query = $pdo->prepare('SELECT * FROM admin_table');
+    $query->execute();
+    $admins = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<div class="container">
-    <h1><strong><i><?php echo $_SESSION['admin_fullname']; ?></i></strong></h1>
-    <br>
-    <a class="btn btn-primary" href="add_admin.php">Add Admin</a>
-    <br><br>
+<?= navbar(); ?>
+<a href="" class="btn btn-success">Add New Admin</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Full name</th>
+            <th scope="col">Username</th>
+            <th scope="col">action</th>
 
-    <table class="table table-hover">
-        <thead class="table-dark">
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($admins as $item) : ?>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">full name</th>
-                <th scope="col">username</th>
-                <th scope="col">action</th>
+                <th scope="row"><?= $item['id'] ?></th>
+                <th><?= $item['full_name'] ?></th>
+                <th><?= $item['username'] ?></th>
+                <th>
+                    <a href="delete_admin.php?id=<?= $item['id'] ?>" class="btn btn-danger">delete</a>
+                </th>
             </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <?php
-                while ($row =  mysqli_fetch_array($r)) {
-                    $id = $row[0];
-                    echo ('<tr>');
-                    echo ("<td> $row[0] </td>");
-                    echo ("<td> $row[1] </td>");
-                    echo ("<td> $row[2] </td>");
-                    echo ("
-                            <td> 
-                            <a href='update_admin.php?id=$id' class='btn btn-warning'>update admin</a>
-                            <a href='delete.php?id=$id&&table=admin' class='btn btn-danger'>delete admin</a>
-                            </td>
-                            ");
-                    echo ('</tr>');
-                }
-                ?>
+        <?php endforeach; ?>
 
-            </tr>
-        </tbody>
-    </table>
-</div>
-<?php include('partial/footer.php'); ?>
+        <?php footer() ?>
